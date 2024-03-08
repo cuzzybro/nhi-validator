@@ -19,3 +19,6 @@ API runs on port 5000. Can access in the browser locally on either http://localh
 
 Open swagger documentation at http://localhost:5000/api-docs
 
+Available api endpoints
+- [GET] /api/get-nhi 
+- [POST] /api/isNhiValid (See swagger api-docs)
