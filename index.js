@@ -40,15 +40,7 @@ class NhiTools {
     }
   
     #getThirdSection() {
-      // let sectionThree = this.alphaNumeric[Math.floor(Math.random() * this.alphaNumeric.length)];
-      // // If 6th Character is alpha set 7th as alpha else set 7th as numeric
-      // if (this.table.includes(sectionThree)) {
-      //   // console.log(`${this.keys}: includes - '${sectionThree}'`)
-      //   sectionThree += this.#randAlpha(this.table, '^')
-      // } else {
-      //   sectionThree += this.numeric[Math.floor(Math.random() * this.numeric.length)];
-      // }
-      // return sectionThree
+      // Set third section value which determines Old or New type   
       return this.alphaNumeric[Math.floor(Math.random() * this.alphaNumeric.length)];
     }
   
