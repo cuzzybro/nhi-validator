@@ -10,24 +10,19 @@ const swaggerUi = require('swagger-ui-express');
 const argv = require('minimist')(process.argv);
 const NhiTools = require('./index.js').NhiTools
 require('dotenv').config();
-
+// initialize variables
 var PORT
-
-// handle parsed port argument. Set 3000 as default 
+// handle parsed port argument.  
 if (!argv.port) {
-    PORT = 5000;
+    PORT = 10500;
 } else {
     PORT = argv.port;
 };
-
 // create express api instance
 var app = express();
-
-app.set("title", "express api");
-
+// express api available functions
 app.use(bp.json());
 app.use(express.urlencoded({ extended: false }));
-
 // api header controller
 app.use(function(req, res, next) {
     res.header('Access-Control-Allow-Origin',"*");
@@ -35,7 +30,6 @@ app.use(function(req, res, next) {
     res.header('Access-Control-Allow-Headers', 'Content-Type');
     next();
 });
-
 // create swagger documentation feature
 const swaggerOptions = {
         swaggerDefinition: {
@@ -48,19 +42,19 @@ const swaggerOptions = {
         },
         apis: ['server.js']
 }
-
+// swagger specification
 const spec = swaggerJsDoc(swaggerOptions);
-
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(spec));
-
+// api docs route
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(spec))
 // api listener
 app.listen(PORT, () => console.log(`Express server running on port ${PORT}...`));
-
+// api functions
 function getRandomNhi() {
     const nhi = new NhiTools();
-    return nhi.generateNhi();
+    nhi.generateNhi();
+    return nhi.nhiNumber;
 };
-
+// available POST routes
 /**
  * @swagger
  * /api/isNhiValid:
@@ -100,8 +94,9 @@ app.post('/api/isNhiValid', (req, res) => {
     var check = tools.isNhiValid(nhi)
     res.send({ "nhi": nhi, "valid": check })
 })
-
+// available GET routes
 app.get('/api/get-nhi', (req, res) => {
     // return nhi number without MOH proxy store file creation
-    res.json({"nhi": getRandomNhi()})
+    var nhiNumber = getRandomNhi()
+    res.json({ "nhi": nhiNumber })
 });

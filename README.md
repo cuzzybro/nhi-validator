@@ -15,9 +15,9 @@ npm install
 node run startServer
 ```
 
-API runs on port 5000. Can access in the browser locally on either http://localhost:5000 or http://127.0.0.1:5000
+API runs on port 10500. Can access in the browser locally on either http://localhost:10500 or http://127.0.0.1:10500
 
-Open swagger documentation at http://localhost:5000/api-docs
+Open swagger documentation at http://localhost:10500/api-docs
 
 Available api endpoints
 - [GET] /api/get-nhi 
