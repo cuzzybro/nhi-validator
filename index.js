@@ -1,8 +1,8 @@
+const randexp = require('randexp')
+
 class NhiTools {
     // nhi main value table object
     #table = ['^', 'A','B','C','D','E','F','G','H','J','K','L','M','N','P','Q','R','S','T','U','V','W','X','Y','Z']
-    #alphaNumeric = "ABCDEFGHJKLMNPQRSTUVWXYZ0123456789"; // uppercase alphanumeric value provider
-    #numeric = "0123456789"; // numeric value provider
     #isAlpha = false; // store check if 6th character is alpha. boolean
     #nhiInitialString; // store initial nhi string
     nhiNumber; // store resultant generated / validated nhi. Available at class level
@@ -10,38 +10,6 @@ class NhiTools {
     #check; // store check value
     #MODHIGH = 23
     #MODLOW = 11
-  
-    #randomOption(arr, exclude) {
-      var randOption = arr[Math.floor(Math.random()*arr.length)];
-      if(randOption===exclude){
-          return this.#randomOption(arr, exclude);
-      }else{
-          return randOption;
-      }
-    }
-  
-    #getFirstSection() {
-      // Set first 3 Characters as alpha
-      let sectionOne = '';
-      for (let i=0; i<3; i++) {
-        sectionOne += this.#randomOption(this.#table, '^')
-      };
-      return sectionOne;
-    }
-  
-    #getSecondSection() {
-      // Set second 2 Characters as numeric
-      let sectionTwo = '';
-      for (let i=0; i<2; i++) {
-        sectionTwo += this.#randomOption(this.#numeric);
-      };
-      return sectionTwo
-    }
-  
-    #getThirdSection() {
-      // Set third section value which determines Old or New type   
-      return this.#randomOption(this.#alphaNumeric);
-    }
   
     generateNhi() {
       this.#generateNhiInitialString()
@@ -54,8 +22,10 @@ class NhiTools {
     };
   
     #generateNhiInitialString() {
-      this.#nhiInitialString = this.#getFirstSection() + this.#getSecondSection() + this.#getThirdSection()
-      return this.#nhiInitialString
+      // this.#nhiInitialString = this.#getFirstSection() + this.#getSecondSection() + this.#getThirdSection()
+      let rand = new randexp('^[A-HJ-NP-Z]{3}[0-9]{2}[A-HJ-NP-Z0-9]');
+      this.#nhiInitialString = rand.gen();
+      return this.#nhiInitialString;
     }
 
     #setThirdChar(nhiNumber) {
