@@ -22,7 +22,6 @@ class NhiTools {
     };
   
     #generateNhiInitialString() {
-      // this.#nhiInitialString = this.#getFirstSection() + this.#getSecondSection() + this.#getThirdSection()
       let rand = new randexp('^[A-HJ-NP-Z]{3}[0-9]{2}[A-HJ-NP-Z0-9]');
       this.#nhiInitialString = rand.gen();
       return this.#nhiInitialString;
